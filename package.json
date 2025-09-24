@@ -1,9 +1,12 @@
 {
-  "name": "simple-working-test",
+  "name": "real-sdk-test",
   "version": "1.0.0",
-  "description": "Simple working test for Runflow",
+  "description": "Real Runflow SDK test with actual SDK usage",
   "main": "main.ts",
-  "dependencies": {},
+  "dependencies": {
+    "@runflow-ai/sdk": "file:../../sdk",
+    "zod": "^3.22.0"
+  },
   "devDependencies": {
     "typescript": "^5.0.0",
     "ts-node": "^10.0.0"
