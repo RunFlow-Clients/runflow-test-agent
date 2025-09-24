@@ -1,10 +1,11 @@
 {
-  "name": "runflow-hello-world",
+  "name": "runflow-hello-world-sdk",
   "version": "1.0.0",
-  "description": "Simple Hello World agent for Runflow",
+  "description": "Hello World agent using Runflow SDK properly",
   "main": "main.ts",
   "dependencies": {
-    "@runflow-ai/sdk": "^1.0.0"
+    "@runflow-ai/sdk": "^1.0.0",
+    "zod": "^3.22.0"
   },
   "devDependencies": {
     "typescript": "^5.0.0",
