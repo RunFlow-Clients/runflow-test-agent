@@ -1,31 +1,13 @@
 {
-  "name": "runflow-test-agent",
+  "name": "runflow-hello-world",
   "version": "1.0.0",
-  "description": "Test agent for Runflow execution engine",
+  "description": "Simple Hello World agent for Runflow",
   "main": "main.ts",
-  "type": "module",
-  "scripts": {
-    "start": "node main.js",
-    "dev": "ts-node main.ts",
-    "build": "tsc"
-  },
   "dependencies": {
-    "@runflow-ai/sdk": "latest",
-    "axios": "^1.6.0",
-    "zod": "^3.22.0",
-    "uuid": "^9.0.0"
+    "@runflow-ai/sdk": "^1.0.0"
   },
   "devDependencies": {
-    "@types/node": "^20.0.0",
     "typescript": "^5.0.0",
-    "ts-node": "^10.9.0"
-  },
-  "keywords": [
-    "runflow",
-    "ai",
-    "agent",
-    "test"
-  ],
-  "author": "Runflow Team",
-  "license": "MIT"
+    "ts-node": "^10.0.0"
+  }
 }
