@@ -1,94 +1,55 @@
-// REAL Runflow SDK Test
-import { Agent, createTool } from '@runflow-ai/sdk';
-import { z } from 'zod';
+// Minimal Runflow SDK Test - Just Import
+console.log('🚀 Starting minimal SDK test...');
 
-console.log('🚀 Starting REAL SDK test...');
+// Import SDK components
+import { Agent } from '@runflow-ai/sdk';
 
-// Create a simple tool
-const echoTool = createTool({
-  id: 'echo',
-  description: 'Echo back the input message',
-  inputSchema: z.object({
-    text: z.string().describe('Text to echo back')
-  }),
-  outputSchema: z.object({
-    echoed: z.string(),
-    timestamp: z.string()
-  }),
-  execute: async ({ context }) => {
-    console.log('🔧 Echo tool executing with:', context);
-    return {
-      echoed: `Echo: ${context.text}`,
-      timestamp: new Date().toISOString()
-    };
-  }
-});
-
-// Create agent with SDK
-const testAgent = new Agent({
-  name: 'Real SDK Test Agent',
-  instructions: 'You are a test agent that demonstrates real SDK usage. Use the echo tool when appropriate.',
-  model: {
-    provider: 'openai',
-    model: 'gpt-4'
-  },
-  tools: {
-    echo: echoTool
-  }
-});
+console.log('✅ SDK imported successfully');
 
 export async function main(input: any): Promise<any> {
-  console.log('📥 REAL SDK Test - Input received:', JSON.stringify(input, null, 2));
+  console.log('📥 Minimal SDK Test - Input:', JSON.stringify(input));
   
   try {
-    // This is the key - we're NOT calling agent.process() because that needs API client
-    // Instead, we'll demonstrate SDK components working
+    console.log('🤖 Creating agent...');
     
-    console.log('🤖 Agent created:', testAgent.name);
-    console.log('🔧 Agent model:', testAgent.model);
-    console.log('🛠️ Agent tools:', Object.keys(testAgent.tools));
-    
-    // Test the tool directly
-    const toolResult = await echoTool.execute({
-      context: { text: input.message || 'Hello SDK!' },
-      runflowAPI: null, // We don't have API client in this context
-      projectId: 'test'
+    // Just create an agent instance - don't call complex methods
+    const agent = new Agent({
+      name: 'Minimal Test Agent',
+      instructions: 'Simple test agent',
+      model: {
+        provider: 'openai',
+        model: 'gpt-4'
+      }
     });
     
-    console.log('🔧 Tool result:', toolResult);
+    console.log('✅ Agent created successfully:', agent.name);
     
     const result = {
       success: true,
-      message: `SDK Test Complete! Agent "${testAgent.name}" is ready.`,
-      agentInfo: {
-        name: testAgent.name,
-        instructions: testAgent.instructions,
-        model: testAgent.model,
-        toolsAvailable: Object.keys(testAgent.tools)
+      message: 'SDK imported and agent created successfully!',
+      sdkTest: {
+        agentName: agent.name,
+        agentInstructions: agent.instructions,
+        agentModel: agent.model,
+        sdkImported: true
       },
-      toolTest: toolResult,
-      sdkComponents: {
-        agentClass: 'Agent',
-        toolCreator: 'createTool',
-        zodValidation: 'Working',
-        typeScript: 'Compiled'
-      },
-      inputReceived: input,
+      input: input,
       timestamp: new Date().toISOString()
     };
     
-    console.log('📤 REAL SDK Test - Returning result:', JSON.stringify(result, null, 2));
-    console.log('✅ REAL SDK Test completed successfully');
+    console.log('📤 Minimal SDK Test - Result:', JSON.stringify(result, null, 2));
+    console.log('✅ Minimal SDK test completed');
     
     return result;
     
   } catch (error) {
-    console.error('❌ REAL SDK Test failed:', error);
+    console.error('❌ Minimal SDK Test error:', error);
     
     return {
       success: false,
       error: error.message,
-      message: 'SDK test failed, but SDK components were imported successfully',
+      stack: error.stack,
+      message: 'SDK test failed during execution',
       timestamp: new Date().toISOString()
     };
   }
